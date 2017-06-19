@@ -1,0 +1,38 @@
+import nltk
+
+class Analyzer():	
+    
+    
+    
+    def __init__(self):
+        self.positives=open("positive-words.txt")
+        self.negatives=open("negative-words.txt")
+        self.lp=[]
+        self.ln=[]
+        for i in self.positives:
+            if i.startswith(';') or i.startswith(' '):
+                continue
+            i=i.strip('\n')
+            self.lp.append(i)
+        for j in self.negatives:
+            if j.startswith(';') or j.startswith(' '):
+                continue
+            j=j.strip('\n')
+            self.ln.append(j)    
+    	
+    	
+	
+
+    def analyze(self, text,sp,sn):
+       
+        
+        if text in self.lp:
+            sp=sp+1
+            
+        if text in self.ln:
+            sn=sn+1
+        
+        
+        return sp-sn
+    
+ 

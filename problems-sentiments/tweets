@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+# TODO
+import os
+import sys
+
+from analyzer import Analyzer
+from termcolor import colored
+import helpers
+import nltk
+def main():
+    if len(sys.argv)!=2:
+        sys.exit("Only one agument is expected")
+    tl=helpers.get_user_timeline(sys.argv[1],50)
+    
+    
+    obj=Analyzer()
+    for tweet in tl:
+        tok=nltk.tokenize.TweetTokenizer()
+        tokens=tok.tokenize(tweet)
+        score=0
+        for word in tokens:
+            score=obj.analyze(word,0,0)+score
+        if score>0:
+            print(colored(tweet,"green"))
+        elif score<0:
+            print(colored(tweet,"red"))
+        else:
+            print(colored(tweet,"yellow"))
+        
+            
+        
+if __name__ == "__main__":
+    main()
+    
